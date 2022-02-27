@@ -2,11 +2,11 @@ package co.com.sofka.crud.services;
 
 import co.com.sofka.crud.dtos.TodoDTO;
 import co.com.sofka.crud.models.Todo;
+import co.com.sofka.crud.models.TodoList;
 import co.com.sofka.crud.repositories.TodoListRepository;
 import co.com.sofka.crud.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -26,25 +26,62 @@ public class TodoService {
     }
 
     public TodoDTO getTodoById(Long id) {
-        return todoModelToDTO(this.todoRepository.findById(id).get());
+        Optional<Todo> todo = this.todoRepository.findById(id);
+        if (todo.isEmpty()) {
+            throw new ShowException("El id no existe");
+        }
+        return todoModelToDTO(todo.get());
     }
 
     public TodoDTO addTodoByListId(TodoDTO todoDTO, long idList) {
-        return todoModelToDTO(
-                todoRepository.save(
-                        new Todo(
-                                todoDTO.getName(),
-                                todoDTO.isCompleted(),
-                                listRepository.findById(idList).get()
-                        )));
+        // Comprobando existencia de la lista a modificar
+        Optional<TodoList> listTodo = listRepository.findById(idList);
+        if (listTodo.isEmpty()) {
+            throw new ShowException("El id de List no existe");
+        }
+
+        // Validando carácteres del nombre en el todoDTO
+        String nameDTO = todoDTO.getName();
+        if (nameDTO == null || nameDTO.isEmpty()) {
+            throw new ShowException("El nombre de TO-DO está vacío");
+        } else if (nameDTO.length() > 25) {
+            throw new ShowException("El nombre de TO-DO excede el número de carácteres");
+        }
+
+        return todoModelToDTO(todoRepository.save(new Todo(nameDTO, todoDTO.isCompleted(), listTodo.get())));
     }
 
     public TodoDTO updateTodo(TodoDTO todoDTO, long id) {
+        // Comprobando existencia del to-do a modificar
         Optional<Todo> oldTodo = this.todoRepository.findById(id);
-        oldTodo.get().setList(listRepository.findById(todoDTO.getIdList()).get());
-        oldTodo.get().setId(todoDTO.getId());
-        oldTodo.get().setName(todoDTO.getName());
+        if (oldTodo.isEmpty()) {
+            throw new ShowException("El id del TO-DO no existe");
+        }
+        // Validando carácteres del nombre en el todoDTO
+        String nameDTO = todoDTO.getName();
+        if (nameDTO == null || nameDTO.isEmpty()) {
+            throw new ShowException("El nombre del TO-DO está vacío");
+        } else if (nameDTO.length() > 25) {
+            throw new ShowException("El nombre del TO-DO excede el número de carácteres");
+        }
+        // Comprobando existencia de la lista del todoDTO
+        Long listIdDTO = todoDTO.getIdList();
+        if (listIdDTO != null) {
+            Optional<TodoList> listDTO = listRepository.findById(listIdDTO);
+            if (listDTO.isEmpty()) {
+                throw new ShowException("El idList del TO-DO no existe");
+            }
+            // Se establece la lista que coincide con el el id
+            oldTodo.get().setList(listDTO.get());
+        }
+        // Comprobando id del todoDTO
+        if (todoDTO.getId() != null) {
+            oldTodo.get().setId(todoDTO.getId());
+        }
+
+        oldTodo.get().setName(nameDTO);
         oldTodo.get().setCompleted(todoDTO.isCompleted());
+
         return todoModelToDTO(todoRepository.save(oldTodo.get()));
     }
 

@@ -21,11 +21,21 @@ public class TodoListService {
     }
 
     public TodoListDTO getListById(Long id) {
-        return listModelToDTO(this.listRepository.findById(id).get());
+        Optional<TodoList> todoList = this.listRepository.findById(id);
+        if (todoList.isEmpty()) {
+            throw new ShowException("El id no existe");
+        }
+        return listModelToDTO(todoList.get());
     }
 
     public TodoListDTO addList(TodoListDTO todoListDTO) {
-        return listModelToDTO(listRepository.save(new TodoList(todoListDTO.getName())));
+        String nameList = todoListDTO.getName();
+        if (nameList.isEmpty()) {
+            throw new ShowException("El nombre está vacío");
+        } else if (nameList.length() > 25) {
+            throw new ShowException("El nombre excede el número de carácteres");
+        }
+        return listModelToDTO(listRepository.save(new TodoList(nameList)));
     }
 
     public void deleteList(Long id) {
