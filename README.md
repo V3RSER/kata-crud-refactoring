@@ -14,11 +14,11 @@ Se tiene presente un formulario donde se registra unas tareas basadas en una lis
 
 #### Demo
 
-![alt text]( ./demo.gif "Demo funcional del ToDo")
+![alt text]( ./docs/demo.gif "Demo funcional del ToDo")
  
 ### Instalación
 
-![alt text]( ./start.gif "Instalación y puesta en marcha")
+![alt text]( ./docs/start.gif "Instalación y puesta en marcha")
 
 ### Perspectiva Front-end
 Se tiene un archivo con toda la lógica, se presentan algunas malas prácticas en la codificación del mismo. Se debe refactorizar en donde se separe los componentes en archivos y se representen una mejor estructura. 
@@ -41,9 +41,16 @@ Dentro del back-end no se tiene una base de datos basada en servidor. Se debe ap
 
 ## Reto
 
-Hacer un fork en su propio namespace y presentar la solución más valida para ser discutida, argumentar los aspectos de mejora y aplicar algunas técnica de refactorización. Resolverlo de forma individual, aplicar los commit para cada paso que se realice en la refactorización. 
+Hacer un fork en su propio namespace y presentar la solución más valida para ser discutida, argumentar los aspectos de mejora y aplicar algunas técnicas de refactorización. Resolverlo de forma individual, aplicar los commit para cada paso que se realice en la refactorización. 
 
-Realizar la siguiente representación donde se tiene TO-Do List agripado en listas.
+Realizar la siguiente representación donde se tiene TO-Do List agrupado en listas.
 
-![alt text]( ./todo-list-kata.gif "Demo funcional del ToDo List")
+![alt text]( ./docs/todo-list-kata.gif "Demo funcional del ToDo List")
 
+# Solución
+
+## Base de datos
+
+Se propone el siguiente modelo de una base de datos en MySQL:
+
+![alt text]( ./docs/model-db.jpeg "Modelo entidad relación")
