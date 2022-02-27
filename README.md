@@ -37,7 +37,7 @@ Dentro del back-end no se tiene una base de datos basada en servidor. Se debe ap
 - <s>La base de datos debe esta en un servidor como MySQL.</s>
 - Aplicar reglas para no guardar elementos vácios.
 - Validar carácteres y demás para guardar las entidades de los TO-DO.
-- Trabajar con un objeto de trasporte de datos o un objeto plano para representa los datos ante la API.
+- <s>Trabajar con un objeto de trasporte de datos o un objeto plano para representa los datos ante la API.</s>
 
 ## Reto
 
@@ -47,7 +47,7 @@ Realizar la siguiente representación donde se tiene TO-Do List agrupado en list
 
 ![alt text]( ./docs/todo-list-kata.gif "Demo funcional del ToDo List")
 
-# Solución
+# [Solución]
 
 ## Base de datos
 
