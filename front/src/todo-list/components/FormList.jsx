@@ -22,20 +22,27 @@ export default () => {
   };
 
   return (
-    <form ref={formRef}>
-      <div>
-        <div>
+    <form className="form-group row m-0" ref={formRef}>
+      <div className="col-xs-2">
+        <div className="input-group mb-3">
           <input
             type="text"
             name="name"
+            className="form-control "
             placeholder="Lista de TO-DO"
             onChange={(event) => {
               setState({ name: event.target.value });
             }}
           ></input>
-          <button onClick={onCreate} type="button" id="button-addon1">
-            Nueva lista
-          </button>
+          <div className="input-group-append">
+            <button
+              className="btn btn-success"
+              type="button"
+              onClick={onCreate}
+            >
+              Nueva lista
+            </button>
+          </div>
         </div>
       </div>
     </form>

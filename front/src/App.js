@@ -5,15 +5,17 @@ import TableList from "./todo-list/components/TableList";
 
 function App() {
   return (
-    <StoreProvider>
-      <div>
-        <h3>Dashboard</h3>
-      </div>
-      <div>
-        <FormList></FormList>
-        <TableList />
-      </div>
-    </StoreProvider>
+    <div className="container-fluid">
+      <StoreProvider>
+        <div class="jumbotron card card-block py-2">
+          <h3 className="text-center my-2">Dashboard</h3>
+        </div>
+        <div>
+          <FormList></FormList>
+          <TableList />
+        </div>
+      </StoreProvider>
+    </div>
   );
 }
 

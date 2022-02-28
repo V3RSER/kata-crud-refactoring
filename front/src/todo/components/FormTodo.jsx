@@ -52,19 +52,32 @@ export default ({ idList, todo }) => {
   };
 
   return (
-    <form ref={formRef}>
-      <div>
-        <input
-          type="text"
-          name="name"
-          placeholder="¿Qué piensas hacer?"
-          defaultValue={item.name}
-          onChange={(event) => {
-            setState({ ...state, name: event.target.value });
-          }}
-        ></input>
-        {item.id && <button onClick={onEdit}>Actualizar</button>}
-        {!item.id && <button onClick={onAdd}>Crear</button>}
+    <form className="form-group row mb-0 ml-0" ref={formRef}>
+      <div className="col-xs-2">
+        <div className="input-group mb-3">
+          <input
+            className="form-control "
+            type="text"
+            name="name"
+            placeholder="¿Qué piensas hacer?"
+            defaultValue={item.name}
+            onChange={(event) => {
+              setState({ ...state, name: event.target.value });
+            }}
+          ></input>
+          <div className="input-group-append">
+            {item.id && (
+              <button className="btn btn-outline-warning" onClick={onEdit}>
+                Actualizar
+              </button>
+            )}
+            {!item.id && (
+              <button className="btn btn-outline-success" onClick={onAdd}>
+                Crear
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </form>
   );

@@ -38,9 +38,18 @@ export default () => {
       {list.elements.map((element) => {
         return (
           <div key={element.id} id={"list-todo-" + element.id}>
-            <fieldset>
-              <legend>{element.name.toUpperCase()}<button onClick={() => onDelete(element.id)}>Eliminar</button></legend>
-              
+            <fieldset className="default-field pt-1 px-4 mt-2">
+              <legend className="w-auto">
+                {element.name.toUpperCase()}
+                <button
+                  type="button"
+                  className="btn btn-danger ml-1"
+                  onClick={() => onDelete(element.id)}
+                >
+                  Eliminar
+                </button>
+              </legend>
+
               <FormTodo idList={element.id} todo={todo} />
               <TableTodo idList={element.id} todo={todo} />
             </fieldset>

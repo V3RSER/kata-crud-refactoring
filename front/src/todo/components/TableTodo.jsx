@@ -57,13 +57,13 @@ export default ({ idList, todo }) => {
   return (
     <div>
       {!isLoaded && <div>Loading...</div>}
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="thead-light">
           <tr>
-            <td>ID</td>
-            <td>Tarea</td>
-            <td>¿Completado?</td>
-            <td></td>
+            <th scope="col">ID</th>
+            <th scope="col">Tarea</th>
+            <th scope="col">¿Completado?</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -74,11 +74,12 @@ export default ({ idList, todo }) => {
                 style={todo.completed ? decorationDone : {}}
                 id={"to-do-" + todo.id}
               >
-                <td>{todo.id}</td>
+                <th scope="row">{todo.id}</th>
                 <td>{todo.name}</td>
                 <td>
                   <div>
                     <input
+                      className="form-checkbox-input"
                       type="checkbox"
                       defaultChecked={todo.completed}
                       onChange={(event) => onChange(event, todo)}
@@ -86,11 +87,16 @@ export default ({ idList, todo }) => {
                   </div>
                 </td>
                 <td>
-                  <button type="button" onClick={() => onDelete(todo.id)}>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger"
+                    onClick={() => onDelete(todo.id)}
+                  >
                     Eliminar
                   </button>
                   <button
                     type="button"
+                    className="btn btn-outline-primary ml-2"
                     disabled={todo.completed}
                     onClick={() => onEdit(todo)}
                   >
