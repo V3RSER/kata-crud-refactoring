@@ -23,6 +23,11 @@ public class TodoController {
         return todoService.getTodoById(id);
     }
 
+    @GetMapping(path = "todo/list/{idList}")
+    public Iterable<TodoDTO> getAllTodoByLisId(@PathVariable("idList") Long idList) {
+        return todoService.getAllTodoByLisId(idList);
+    }
+
     @PostMapping(path = "todo/list/{idList}")
     public TodoDTO addTodoByListId(@RequestBody TodoDTO todoDTO, @PathVariable("idList") Long idList) {
         return todoService.addTodoByListId(todoDTO, idList);

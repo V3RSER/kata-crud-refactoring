@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
@@ -31,6 +32,15 @@ public class TodoService {
             throw new ShowException("El id no existe");
         }
         return todoModelToDTO(todo.get());
+    }
+
+    public Set<TodoDTO> getAllTodoByLisId(Long idList) {
+        // Comprobando existencia de la lista
+        Optional<TodoList> listTodo = listRepository.findById(idList);
+        if (listTodo.isEmpty()) {
+            throw new ShowException("El id de List no existe");
+        }
+        return listTodo.get().getTodos().stream().map(TodoService::todoModelToDTO).collect(Collectors.toSet());
     }
 
     public TodoDTO addTodoByListId(TodoDTO todoDTO, long idList) {
