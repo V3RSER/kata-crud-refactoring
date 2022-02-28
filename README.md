@@ -32,8 +32,8 @@ Dentro del back-end no se tiene una base de datos basada en servidor. Se debe ap
 
 ### Issues
 
-- <s>Resolver el diseño gráfico<s>
-- <s>Separar bien los elementos gráficos como componentes, store, reducer y providers.<s>
+- <s>Resolver el diseño gráfico</s>
+- <s>Separar bien los elementos gráficos como componentes, store, reducer y providers.</s>
 - <s>La base de datos debe esta en un servidor como MySQL.</s>
 - <s>Aplicar reglas para no guardar elementos vácios.</s>
 - <s>Validar carácteres y demás para guardar las entidades de los TO-DO.</s>
